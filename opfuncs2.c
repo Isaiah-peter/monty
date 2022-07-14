@@ -7,25 +7,23 @@
  */
 void rotr(stack_t **stack, __attribute__((unused))unsigned int linenumber)
 {
-	stack_t *first, *second;
+	stack_t *top, *bottom;
 
-	if (!(*stack) || !(*stack)->next)
-	{
+	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
 		return;
-	}
 
-	first = *stack;
+	top = (*stack)->next;
+	bottom = (*stack)->next;
+	while (bottom->next != NULL)
+		bottom = bottom->next;
 
-	while (first->next->next)
-	{
-		first = first->next;
-	}
-	second = first->next;
-	first->next = NULL;
-	(*stack)->prev = second;
-	second->next = *stack;
-	second->prev = NULL;
-	*stack = second;
+	bottom->prev->next = NULL;
+	(*stack)->next = bottom;
+	bottom->prev = *stack;
+	bottom->next = top;
+	top->prev = bottom;
+
+	(void)line_number;
 }
 /**
  * stack_op - makes it stack format (default)
