@@ -31,4 +31,3 @@ bool check_input(char *str)
 	}
 	return (true);
 }
-Footer
