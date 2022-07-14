@@ -5,7 +5,7 @@
  * @linenumber: current ln
  *
  */
-void rotr(stack_t **stack, __attribute__((unused))unsigned int linenumber)
+void rotr(stack_t **stack, unsigned int linenumber)
 {
 	stack_t *top, *bottom;
 
