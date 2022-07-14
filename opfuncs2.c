@@ -5,25 +5,27 @@
  * @linenumber: current ln
  *
  */
-void rotr(stack_t **stack, unsigned int linenumber)
+void rotr(stack_t **stack, __attribute__((unused))unsigned int linenumber)
 {
-	stack_t *top, *bottom;
+	stack_t *first, *second;
 
-	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
+	if (!(*stack) || !(*stack)->next)
+	{
 		return;
+	}
 
-	top = (*stack)->next;
-	bottom = (*stack)->next;
-	while (bottom->next != NULL)
-		bottom = bottom->next;
+	first = *stack;
 
-	bottom->prev->next = NULL;
-	(*stack)->next = bottom;
-	bottom->prev = *stack;
-	bottom->next = top;
-	top->prev = bottom;
-
-	(void)line_number;
+	while (first->next->next)
+	{
+		first = first->next;
+	}
+	second = first->next;
+	first->next = NULL;
+	(*stack)->prev = second;
+	second->next = *stack;
+	second->prev = NULL;
+	*stack = second;
 }
 /**
  * stack_op - makes it stack format (default)
